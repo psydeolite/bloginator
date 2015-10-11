@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, redirect, url_for
 
 import sqlite3
 import auth
@@ -31,7 +31,7 @@ def login():
         if auth.authenticate(uname, pword):
             if 'username' not in session:
                 session['username'] = uname
-                return redirect(url_for("secret"))
+                return redirect(url_for("home"))
         else:
             err = "INVALID USERNAME OR PASSWORD!!"
             return render_template("login.html", err = err)
