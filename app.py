@@ -46,7 +46,8 @@ def blog():
 def blog():
     if username not in session:
         return redirect(url_for('login'))
-    return render_template("blog.html")
+    load_last10 = data.get(10)
+    return render_template("blog.html",load_last10)
 
 if __name__ == "__main__":
     app.debug = True
