@@ -37,6 +37,17 @@ def login():
             return render_template("login.html", err = err)
 
 
+@app.route("/blog")
+@app.route("/blog/")
+def blog():
+    return redirect(url_for('login'))
+
+@app.route("/blog/<username>")
+def blog():
+    if username not in session:
+        return redirect(url_for('login'))
+    return render_template("blog.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.secret_key = "cronut"
