@@ -8,7 +8,13 @@ def testing():
      q = " SELECT * FROM users "
      result = c.execute(q)
      for r in result:
-         print r
+        print r
+
+     q = " SELECT * FROM posts "
+     result = c.execute(q)
+     for r in result:
+	print r
+
 
 create.create()     
 testing()
