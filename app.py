@@ -5,6 +5,11 @@ import auth
 
 app = Flask(__name__)
 
+conn = sqlite.connect("database.db")
+c = conn.cursor()
+
+
+
 @app.route("/")
 @app.route("/home")
 @app.route("/home/")
