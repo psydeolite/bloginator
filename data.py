@@ -13,17 +13,17 @@ def make_table():
         c.execute(q)
         con.commit()
 
-def add_post(words, postid, authorid):
+def add_post(words, postid, authorid,date):
         con = sqlite3.connect("database.db")
         c = con.cursor()
-        q = "INSERT INTO post VALUES('{}','{}','{}')".format(words,postid,authorid)
+        q = "INSERT INTO post VALUES('{}','{}','{}','{}')".format(words,postid,authorid,date)
         c.execute(q)
         con.commit()
 
 def delete_post(postid,authorid):
         con = sqlite3.connect("database.db")
         c = con.cursor()
-        q = "SELECT userid FROM post WHERE username ='{}' AND postid = '{}'".format(authorid,postid)
+        q = "SELECT * FROM post WHERE authorid='{}' AND postid = '{}'".format(authorid,postid)
         c.execute(q)
         p = c.fetchone()
         if p is None:
@@ -32,3 +32,9 @@ def delete_post(postid,authorid):
                 q = "UPDATE post SET words = '{}' WHERE authorid = '{}' AND postid = '{}'".format("This post is no longer viewable",authorid,postid)
                 c.execute(q)
                 con.commit()
+
+make_table()
+add_post("alsdfughlkasdbggfadgr","1","authorid","1/1/11")
+delete_post(":)","authorid")
+delete_post("1","dsagouhadfkg")
+delete_post("1","authorid")
