@@ -16,13 +16,28 @@ def make_table():
 def add_post(words, postid, authorid,date):
         con = sqlite3.connect("database.db")
         c = con.cursor()
+        q = " SELECT * FROM post "
+        result = c.execute(q)
+        for r in result:
+                print r
+                print"\n"
         q = "INSERT INTO post VALUES('{}','{}','{}','{}')".format(words,postid,authorid,date)
         c.execute(q)
+        q = " SELECT * FROM post"
+        result = c.execute(q)
+        for r in result:
+                print r
+                print"\n"
         con.commit()
 
 def delete_post(postid,authorid):
         con = sqlite3.connect("database.db")
         c = con.cursor()
+        q = " SELECT * FROM post"
+        result = c.execute(q)
+        for r in result:
+                print r
+                print"\n"
         q = "SELECT * FROM post WHERE authorid='{}' AND postid = '{}'".format(authorid,postid)
         c.execute(q)
         p = c.fetchone()
@@ -32,7 +47,16 @@ def delete_post(postid,authorid):
                 q = "UPDATE post SET words = '{}' WHERE authorid = '{}' AND postid = '{}'".format("This post is no longer viewable",authorid,postid)
                 c.execute(q)
                 con.commit()
+        q = " SELECT * FROM post"
+        result = c.execute(q)
+        for r in result:
+                print r
+                print"\n"
 
+con = sqlite3.connect("database.db")
+c = con.cursor()
+c.execute("delete from post")
+con.commit()
 make_table()
 add_post("alsdfughlkasdbggfadgr","1","authorid","1/1/11")
 delete_post(":)","authorid")
