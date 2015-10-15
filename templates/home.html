@@ -1,23 +1,38 @@
 <!DOCTYPE html>
+<title> Bloginator </title>
+<dl>
+  <dt>Title</dt>
+  <dd>Blog Entry</dd>
+  <dt>Post</dt>
+  <dd>Wooo I wrote a Blog Entry</dd>
+</dl>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
 {%extends "layout.html" %}
-  <title> Bloginator </title>
+<title> Bloginator </title>
 {% block body %}
 {% if session.logged_in %}
-    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
-      <dl>
-        <dt>Title:
-        <dd><input type=text size=30 name=title>
+<form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+  <dl>
+    <dt>Title:
+      <dd><input type=text size=30 name=title>
         <dt>Text:
-        <dd><textarea name=text rows=5 cols=40></textarea>
-        <dd><input type=submit value=Share>
+          <dd><textarea name=text rows=5 cols=40></textarea>
+          <dd><input type=submit value=Share>
       </dl>
-    </form>
-  {% endif %}
-  <ul class=entries>
+</form>
+{% endif %}
+<ul class=entries>
   {% for entry in entries %}
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
-  {% else %}
+  <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+    {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
-  {% endfor %}
-  </ul>
+      {% endfor %}
+</ul>
 {% endblock %}
+-->
