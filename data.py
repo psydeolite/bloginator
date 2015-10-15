@@ -5,11 +5,9 @@ def make_table():
 	c = con.cursor()
 	q = "create table if not exists users(uname integer, pword text, userid text)"
         c.execute(q)
-        q = "create table if not exists blog(blogid integer, authorid integer, bname text, date text)"
+    q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
         c.execute(q)
-        q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
-        c.execute(q)
-        q = "create table if not exists comment(words text, postid integer, commid integer, authorid integer, date text)"
+    q = "create table if not exists comment(words text, postid integer, commid integer, authorid integer, date text)"
         c.execute(q)
         con.commit()
 
