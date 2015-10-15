@@ -3,16 +3,40 @@ import sqlite3
 def make_table():
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
-	q = "create table if not exists users(uname text, pword text, userid text)"
+	q = "create table if not exists users(uname integer, pword text, userid text)"
         c.execute(q)
-        q = "create table if not exists blog(blogid text, authorid text, bname text, date text)"
+        q = "create table if not exists blog(blogid integer, authorid integer, bname text, date text)"
         c.execute(q)
-        q = "create table if not exists post(words text, postid text, authorid text, date text)"
+        q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
         c.execute(q)
-        q = "create table if not exists comment(words text, postid text, commid text, authorid text, date text)"
+        q = "create table if not exists comment(words text, postid integer, commid integer, authorid integer, date text)"
         c.execute(q)
         con.commit()
 
+# ---------------------------USER TABLES---------------------------------
+def add_user(uname, pword, userid):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    q = " SELECT * FROM post "
+    result = c.execute(q)
+    for r in result:
+        print r
+        print "\n"
+        q = "INSERT INTO POST VALUES('{}','{}','{}')".format(uname, pword, userid)
+        c.execute(q)
+        q = " SELECT * FROM post"
+        result = c.execute(q)
+        for r in result:
+            print r
+            print"\n"
+        con.commit()
+
+
+# def delete_user(userid):
+
+
+            
+#-------------------------------POST TABLES--------------------------------------
 def add_post(words, postid, authorid,date):
         con = sqlite3.connect("database.db")
         c = con.cursor()
