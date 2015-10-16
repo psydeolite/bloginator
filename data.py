@@ -3,7 +3,7 @@ import sqlite3
 def make_table():
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
-	q = "create table if not exists users(uname integer, pword text, userid text)"
+	q = "create table if not exists users(uname text, pword text, userid integer, rname text)"
         c.execute(q)
         q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
         c.execute(q)
@@ -11,23 +11,23 @@ def make_table():
         c.execute(q)
         con.commit()
 
-# ---------------------------USER TABLES---------------------------------
-def add_user(uname, pword, userid):
+# ---------------------------USERS TABLES---------------------------------
+def add_user(uname, pword, userid, rname):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    q = " SELECT * FROM user "
+    q = " SELECT * FROM users "
     result = c.execute(q)
     for r in result:
         print r
         print "\n"
-        q = "INSERT INTO POST VALUES('{}','{}','{}')".format(uname, pword, userid)
-        c.execute(q)
-        q = " SELECT * FROM user "
-        result = c.execute(q)
-        for r in result:
-            print r
-            print"\n"
-        con.commit()
+    q = "INSERT INTO users VALUES('{}','{}','{}','{}')".format(uname, pword, userid, rname)
+    c.execute(q)
+    q = " SELECT * FROM users "
+    result = c.execute(q)
+    for r in result:
+        print r
+        print"\n"
+    con.commit()
 
 
 # def delete_user(userid):
@@ -42,7 +42,7 @@ def add_comment(words, postid, commid, authorid, date):
 	for r in result:
 		print r
 		print "\n"
-	q = "INSER INTO comment VALUES ('{}','{}','{}','{}','{}')".format(words, postid, commid, authorid, date)
+	q = "INSERT INTO comment VALUES ('{}','{}','{}','{}','{}')".format(words, postid, commid, authorid, date)
 	c.execute(q)
 	q = " SELECT * FROM comment"
 	result = c.execute(q)
@@ -104,3 +104,9 @@ add_post("alsdfughlkasdbggfadgr","1","authorid","1/1/11")
 delete_post(":)","authorid")
 delete_post("1","dsagouhadfkg")
 delete_post("1","authorid")
+
+print("------------------------------------")
+add_user("greg","gerg",2271, "Gregory Redozubov")
+
+print("-------------------------------")
+add_comment("HIYA GUYS", 123, 456, 789, "10/16/15")
