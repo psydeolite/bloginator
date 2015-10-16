@@ -15,14 +15,14 @@ def make_table():
 def add_user(uname, pword, userid):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    q = " SELECT * FROM post "
+    q = " SELECT * FROM user "
     result = c.execute(q)
     for r in result:
         print r
         print "\n"
         q = "INSERT INTO POST VALUES('{}','{}','{}')".format(uname, pword, userid)
         c.execute(q)
-        q = " SELECT * FROM post"
+        q = " SELECT * FROM user "
         result = c.execute(q)
         for r in result:
             print r
@@ -32,6 +32,26 @@ def add_user(uname, pword, userid):
 
 # def delete_user(userid):
 
+
+#------------------------------COMMENT TABLES-----------------------------------
+def add_comment(words, postid, commid, authorid, date):
+	con = sqlite3.connect("database.db")
+	c = con.cursor()
+	q = "SELECT * FROM comment "
+	result = c.execute(q)
+	for r in result:
+		print r
+		print "\n"
+	q = "INSER INTO comment VALUES ('{}','{}','{}','{}','{}')".format(words, postid, commid, authorid, date)
+	c.execute(q)
+	q = " SELECT * FROM comment"
+	result = c.execute(q)
+	for r in result:
+		print r
+		print "\n"
+	con.commit()
+
+# def delete_comment(commid):
 
             
 #-------------------------------POST TABLES--------------------------------------
