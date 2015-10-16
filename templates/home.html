@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<title> Bloginator </title>
-<dl>
-  <dt>Title</dt>
-  <dd>Blog Entry</dd>
-  <dt>Post</dt>
-  <dd>Wooo I wrote a Blog Entry</dd>
-</dl>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
 
+<div class="container">
+  <div class="jumbotron">
+    <h1>Bloginator</h1>
+    <h2> if logged in</h2>
+    <button type="button" class="btn"> Write Post</button>
+    <button type="button" class="btn"> Log Out</button>
+    <h2>if not</h2>
+    <button type="button" class="btn"> Log In </button>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Title 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+<div class="row">
+    <div class="col-sm-4">
+      <h3>Title 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
 
+  </div>
+</div>
 
-
-
-
-<!--<!DOCTYPE html>
-{%extends "layout.html" %}
-<title> Bloginator </title>
-{% block body %}
-{% if session.logged_in %}
-<form action="{{ url_for('add_entry') }}" method=post class=add-entry>
-  <dl>
-    <dt>Title:
-      <dd><input type=text size=30 name=title>
-        <dt>Text:
-          <dd><textarea name=text rows=5 cols=40></textarea>
-          <dd><input type=submit value=Share>
-      </dl>
-</form>
-{% endif %}
-<ul class=entries>
-  {% for entry in entries %}
-  <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
-    {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
-      {% endfor %}
-</ul>
-{% endblock %}
--->
+</body>
+</html>
