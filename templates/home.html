@@ -28,11 +28,11 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-    {% for r in results %}
-    <h3> {{r[1]}} </h3>
-    <h4> by {{r[2]}} </h4>
+    {% for entry in entries %}
+    <h3> {{entry[1]}} </h3>
+    <h4> by {{entry[2]}} </h4>
     <p> 
-        {{r[0]}}
+        {{entry[0]}}
     </p>
     {% endfor %}
     </div>
