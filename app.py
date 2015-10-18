@@ -91,10 +91,41 @@ def create_post():
                 return redirect(url_for("home"))
 
 
-@app.route("/create/account/")
-@app.route("/create/account")
+@app.route("/create/account", methods=["GET","POST"])
+@app.route("/create/account/", methods=["GET","POST"])
+
 def create_account():
-    return render_template("create_account.html")
+        if 'username' in session:
+            return "<h1> You are already signed in </h1>"
+        else: 
+            if request.method == "GET":
+                return render_template("create_account.html")
+            else:
+                username = request.form['username']
+                password = request.form['password']
+                password_again = request.form['password_again']
+                button = request.form['button']
+    
+                if button == "Cancel":
+                    return render_template('create_account.html')
+                elif len(username) < 6 or len(password) < 6:
+                    err = "Error: Username & Password both must be at least 6 characters." 
+                    return render_template("create_account.html", err = err)
+                elif password != password_again:
+                    err = "Passwords entered do not match. Try again"
+                    return render_template("create_account.html", err = err)
+                else:
+                    con = sqlite3.connect("database.db")
+                    c = con.cursor()
+                    q = " SELECT * FROM users "
+                    result = c.execute(q)
+                    for r in result:
+                        if username == r[0]:
+                            err = "Username already exists."
+                            return render_template("create_account.html", err = err)
+                    # should be good to add
+                    mods.add_user(username, password, 1232, "hefhebf")
+                    return redirect(url_for("home"))
 
 
 

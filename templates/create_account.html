@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+   <title> Create Account </title>
+   <h1> Please Make An Account Here </h1>
+
+   {% if err %}
+   <h3> {{err}} </h3>
+   <hr>
+   {% endif %}
+
+   <form method="POST"> 
+       <hr><br>
+       Username: <input type="text" name="username"> <br>
+       Password: <input type="password" name="password"> <br>
+       Retype Password: <input type="password" name="password_again"> <br>
+    <br><br>
+       <input type="submit" name="button" value="Create">
+       <input type="submit" name="button" value="Cancel">
+
+   </form>
+
+</html>
