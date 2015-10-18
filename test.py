@@ -10,11 +10,10 @@ def testing():
      for r in result:
         print r
 
-     q = " SELECT * FROM posts "
+     q = " SELECT * FROM post "
      result = c.execute(q)
      for r in result:
 	print r
 
 
-create.create()     
 testing()

@@ -13,13 +13,14 @@ def home():
     if request.method == "GET":
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
-        q = "delete from posts"
-        c.execute(q)
-        q = "INSERT INTO posts VALUES('First Post','Testing Testing','drothblatt', 1)"
-        c.execute(q)
-        q = " SELECT * FROM posts "
+        q = " SELECT * FROM post "
         results = c.execute(q)
-        return render_template("home.html", results=results)
+
+        loggedin = False
+        if 'username' in session:
+            loggedin = True
+        uname = "issue"
+        return render_template("home.html", results=results, loggedin=loggedin, uname=uname)
     else: 
         button = request.form['button']
         print button
@@ -60,6 +61,7 @@ def login():
 @app.route("/logout")
 @app.route("/logout/")
 def logout():
+    del session['username']
     return redirect(url_for("home"))
 
 @app.route("/create/post/")

@@ -13,14 +13,18 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Bloginator</h1>
-    <h2> if logged in </h2>
+    {% if loggedin %}
+    <h2> Hi there, {{ uname }} </h2>
     <form method = "POST">
       <button  name = "button" type="submit" class="btn" value="write_post"> Write Post</button>
       <button  name = "button" type="submit" class="btn" value="logout"> Log Out</button>
-    <h2>if not</h2>
+    </form>
+    {% else %}
+    <form method = "POST">
       <button  name = "button" type="submit" class="btn" value="login"> Log In </button>
       <button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
     </form>
+    {% endif %}
   </div>
   <div class="row">
     <div class="col-sm-4">
