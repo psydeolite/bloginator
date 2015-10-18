@@ -21,28 +21,16 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <h3>Testing 1,2,3</h3>
-      <p>
-	<ul>
-	  <li> hi </li>
-	{% for r in results %}
-	  <li> {{r}} </li>
-	{% endfor %}
-	  <li> pls work </li>
-	</ul>
-      </p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    {% for r in results %}
+    <h3> {{r[0]}} </h3>
+    <h4> by {{r[2]}} </h4>
+    <p> 
+        {{r[1]}}
+    </p>
+    {% endfor %}
     </div>
   </div>
-<div class="row">
-    <div class="col-sm-4">
-      <h3>Title 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
 
-  </div>
-</div>
 
 
 </body>
