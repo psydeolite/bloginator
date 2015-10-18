@@ -3,11 +3,9 @@ import sqlite3
 def make_table():
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
-<<<<<<< HEAD
+
 	q = "create table if not exists users(uname text, pword text, userid integer, rname text)"
-=======
 	q = "create table if not exists users(uname text, pword text, userid uname)"
->>>>>>> dbf2419a48a3b2e06ee56c1d819556e5440e4b1a
         c.execute(q)
         q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
         c.execute(q)
@@ -66,16 +64,16 @@ def add_comment(words, postid, commid, authorid, date):
 
 def delete_comment(authorid,commid):
     con = sqlite3.connect("database.db")
-	c = con.cursor()
-        q = "SELECT * FROM comment WHERE authorid='{}' AND commid = '{}'".format(authorid,commid)
+    c = con.cursor()
+    q = "SELECT * FROM comment WHERE authorid='{}' AND commid = '{}'".format(authorid,commid)
+    c.execute(q)
+    p = c.fetchone()
+    if p is None:
+        return False
+    else:
+        q = "UPDATE comment SET words = '{}' WHERE authorid = '{}' AND postid = '{}'".format("This comment is no longer viewable",authorid,commid)
         c.execute(q)
-        p = c.fetchone()
-        if p is None:
-                return False
-        else:
-                q = "UPDATE comment SET words = '{}' WHERE authorid = '{}' AND postid = '{}'".format("This comment is no longer viewable",authorid,commid)
-                c.execute(q)
-                con.commit()
+    con.commit()
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words, postid, authorid,date):

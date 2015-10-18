@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bloginator R3S</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -21,8 +21,16 @@
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <h3>Title 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <h3>Testing 1,2,3</h3>
+      <p>
+	<ul>
+	  <li> hi </li>
+	{% for r in results %}
+	  <li> {{r}} </li>
+	{% endfor %}
+	  <li> pls work </li>
+	</ul>
+      </p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
     </div>
   </div>
@@ -35,6 +43,7 @@
 
   </div>
 </div>
+
 
 </body>
 </html>

@@ -2,20 +2,19 @@ from flask import Flask, render_template, session, request, redirect, url_for
 
 import sqlite3
 import auth
-import data
+import data2
 
 app = Flask(__name__)
-
-conn = sqlite.connect("database.db")
-c = conn.cursor()
-
-
 
 @app.route("/")
 @app.route("/home")
 @app.route("/home/")
 def home():
-    return render_template("home.html")
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    q = " SELECT * FROM posts "
+    results = c.execute(q)
+    return render_template("home.html", results=results)
 
 @app.route("/login")
 @app.route("/login/")
@@ -48,12 +47,12 @@ def login():
 def blog():
     return redirect(url_for('login'))
 
-@app.route("/blog/<username>")
-def blog():
-    if username not in session:
-        return redirect(url_for('login'))
-    load_last10 = data.get(10)
-    return render_template("blog.html",load_last10)
+# @app.route("/blog/<username>")
+# def blog():
+#    if username not in session:
+#        return redirect(url_for('login'))
+#    load_last10 = data.get(10)
+#    return render_template("blog.html",load_last10)
 
 if __name__ == "__main__":
     app.debug = True
