@@ -13,11 +13,14 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Bloginator</h1>
-    <h2> if logged in</h2>
-    <button type="button" class="btn"> Write Post</button>
-    <button type="button" class="btn"> Log Out</button>
+    <h2> if logged in </h2>
+    <form method = "POST">
+      <button  name = "button" type="submit" class="btn" value="write_post"> Write Post</button>
+      <button  name = "button" type="submit" class="btn" value="logout"> Log Out</button>
     <h2>if not</h2>
-    <button type="button" class="btn"> Log In </button>
+      <button  name = "button" type="submit" class="btn" value="login"> Log In </button>
+      <button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
+    </form>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -31,7 +34,8 @@
     </div>
   </div>
 
-
+Hi...
+{{button}}
 
 </body>
 </html>

@@ -6,22 +6,34 @@ import data2
 
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/home")
-@app.route("/home/")
+@app.route("/", methods=["GET","POST"])
+@app.route("/home", methods=["GET","POST"])
+@app.route("/home/", methods=["GET","POST"])
 def home():
-    conn = sqlite3.connect("database.db")
-    c = conn.cursor()
-    q = "delete from posts"
-    c.execute(q)
-    q = "INSERT INTO posts VALUES('First Post','Testing Testing','drothblatt', 1)"
-    c.execute(q)
-    q = " SELECT * FROM posts "
-    results = c.execute(q)
-    return render_template("home.html", results=results)
+    if request.method == "GET":
+        conn = sqlite3.connect("database.db")
+        c = conn.cursor()
+        q = "delete from posts"
+        c.execute(q)
+        q = "INSERT INTO posts VALUES('First Post','Testing Testing','drothblatt', 1)"
+        c.execute(q)
+        q = " SELECT * FROM posts "
+        results = c.execute(q)
+        return render_template("home.html", results=results)
+    else: 
+        button = request.form['button']
+        print button
+        if button == "login":
+            return redirect(url_for("login"))
+        elif button == "logout":
+            return redirect(url_for("logout"))
+        elif button == "write_post":
+            return redirect(url_for("create_post"))
 
-@app.route("/login")
-@app.route("/login/")
+        elif button == "create_account":
+            return redirect(url_for("create_account"))
+
+
 
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
@@ -45,11 +57,27 @@ def login():
             err = "INVALID USERNAME OR PASSWORD!!"
             return render_template("login.html", err = err)
 
+@app.route("/logout")
+@app.route("/logout/")
+def logout():
+    return redirect(url_for("home"))
+
+@app.route("/create/post/")
+@app.route("/create/post")
+def create_post():
+    return render_template("write_post.html")
+
+@app.route("/create/account/")
+@app.route("/create/account")
+def create_account():
+    return render_template("create_account.html")
+
+
 
 @app.route("/blog")
 @app.route("/blog/")
 def blog():
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 # @app.route("/blog/<username>")
 # def blog():
