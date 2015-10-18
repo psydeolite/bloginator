@@ -12,6 +12,10 @@ app = Flask(__name__)
 def home():
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
+    q = "delete from posts"
+    c.execute(q)
+    q = "INSERT INTO posts VALUES('First Post','Testing Testing','drothblatt', 1)"
+    c.execute(q)
     q = " SELECT * FROM posts "
     results = c.execute(q)
     return render_template("home.html", results=results)
