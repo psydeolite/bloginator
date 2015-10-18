@@ -2,7 +2,6 @@ from flask import Flask, render_template, session, request, redirect, url_for
 
 import sqlite3
 import auth
-import data_david
 import mods
 
 app = Flask(__name__)
