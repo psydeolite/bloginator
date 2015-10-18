@@ -18,13 +18,18 @@ def home():
         results = c.execute(q)
         for r in results:
             entries.insert(0, r)
+        q = "SELECT * FROM comment"
+        comments = []
+        results = c.execute(q)
+        for r in results:
+            comments.insert(0, r)
         loggedin = False
         if 'username' in session:
             loggedin = True
             uname = session['username']
         else:
             uname = ""
-        return render_template("home.html", entries=entries, loggedin=loggedin, uname=uname)
+        return render_template("home.html", entries=entries, loggedin=loggedin, uname=uname, comments=comments)
     else: 
         button = request.form['button']
         print button

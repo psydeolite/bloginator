@@ -3,16 +3,16 @@ import sqlite3
 def make_table():
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
-	q = "create table if not exists users(username text, password text, u_id integer, name text)"
+	q = "create table if not exists users(username text, password text, name text)"
         c.execute(q)
-        q = "create table if not exists post(words text, authorid integer, title text)"
+        q = "create table if not exists post(words text, aname text, title text)"
         c.execute(q)
-        q = "create table if not exists comment(words text, ptitle text, authorid integer)"
+        q = "create table if not exists comment(words text, ptitle text, aname text)"
         c.execute(q)
         con.commit()
 
 # ---------------------------USERS TABLES---------------------------------
-def add_user(uname, pword, userid, rname):
+def add_user(uname, pword, rname):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     #q = " SELECT * FROM users "
@@ -20,7 +20,7 @@ def add_user(uname, pword, userid, rname):
     #for r in result:
         #print r
         #print "\n"
-    q = "INSERT INTO users VALUES('{}','{}','{}','{}')".format(uname, pword, userid, rname)
+    q = "INSERT INTO users VALUES('{}','{}','{}')".format(uname, pword, rname)
     c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
@@ -38,11 +38,9 @@ def delete_user(uname, pword):
     #for r in result:
         #print r
         #print "\n"
-    q = "SELECT users.u_id FROM users WHERE username = '{}' and password = '{}'".format(uname,pword)
-    result = c.execute(q)
     q = " DELETE FROM users where username = '{}' and password = '{}'".format(uname,pword)
     c.execute(q)
-    q = " DELETE FROM post where authorid = '{}'".format(result)
+    q = " DELETE FROM post where aname = '{}'".format(uname)
     c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
@@ -58,7 +56,7 @@ def all_user():
                 print r
                 print"\n"
 #------------------------------COMMENT TABLES-----------------------------------
-def add_comment(words,ptitle, authorid):
+def add_comment(words,ptitle,aname):
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
 	#q = "SELECT * FROM comment "
@@ -66,7 +64,7 @@ def add_comment(words,ptitle, authorid):
 	#for r in result:
 		#print r
 		#print "\n"
-	q = "INSERT INTO comment VALUES ('{}','{}','{}')".format(words, ptitle, authorid)
+	q = "INSERT INTO comment VALUES ('{}','{}','{}')".format(words, ptitle, aname)
 	c.execute(q)
 	#q = " SELECT * FROM comment"
 	#result = c.execute(q)
@@ -75,7 +73,7 @@ def add_comment(words,ptitle, authorid):
 		#print "\n"
 	con.commit()
 
-def delete_comment(authorid,ptitle):
+def delete_comment(aname,ptitle):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     #q = " SELECT * FROM comment"
@@ -83,7 +81,7 @@ def delete_comment(authorid,ptitle):
     #for r in result:
         #print r
         #print "\n"
-    q = "DELETE FROM comment WHERE authorid = '{}' and ptitle = '{}'".format(authorid,ptitle)
+    q = "DELETE FROM comment WHERE aname = '{}' and ptitle = '{}'".format(aname,ptitle)
     c.execute(q)
     #q = " SELECT * FROM comment"
     #result = c.execute(q)
@@ -100,7 +98,7 @@ def all_comment():
                 print"\n"
             
 #-------------------------------POST TABLES--------------------------------------
-def add_post(words,authorid,title):
+def add_post(words,aname,title):
         con = sqlite3.connect("database.db")
         c = con.cursor()
         #q = " SELECT * FROM post "
@@ -108,7 +106,7 @@ def add_post(words,authorid,title):
         #for r in result:
                 #print r
                 #print"\n"
-        q = "INSERT INTO post VALUES('{}','{}','{}')".format(words,authorid,title)
+        q = "INSERT INTO post VALUES('{}','{}','{}')".format(words,aname,title)
         c.execute(q)
         #q = " SELECT * FROM post"
         #result = c.execute(q)
@@ -117,7 +115,7 @@ def add_post(words,authorid,title):
                 #print"\n"
         con.commit()
 
-def delete_post(title,authorid):
+def delete_post(title,aname):
         con = sqlite3.connect("database.db")
         c = con.cursor()
         #q = " SELECT * FROM post"
@@ -125,13 +123,13 @@ def delete_post(title,authorid):
         #for r in result:
                 #print r
                 #print"\n"
-        q = "SELECT * FROM post WHERE authorid='{}' AND title = '{}'".format(authorid,title)
+        q = "SELECT * FROM post WHERE aname='{}' AND title = '{}'".format(aname,title)
         c.execute(q)
         p = c.fetchone()
         if p is None:
                 return False
         else:
-                q = "UPDATE post SET words = '{}' WHERE authorid = '{}' AND title = '{}'".format("This post is no longer viewable",authorid,title)
+                q = "UPDATE post SET words = '{}' WHERE aname = '{}' AND title = '{}'".format("This post is no longer viewable",aname,title)
                 c.execute(q)
                 con.commit()
         #q = " SELECT * FROM post"

@@ -29,10 +29,17 @@
   <div class="row">
     <div class="col-sm-4">
     {% for entry in entries %}
-    <h3> {{entry[1]}} </h3>
-    <h4> by {{entry[2]}} </h4>
+    <h3> {{entry[2]}} </h3>
+    <h4> by {{entry[1]}} </h4>
     <p> 
         {{entry[0]}}
+    </p>
+    <p>
+       {% for comment in comments %}
+       {% if comment[1] == entry[2] %}
+       {{comment[2]}}:{{comment[0]}}
+       {% endif %}
+       {% endfor %}
     </p>
     {% endfor %}
     </div>
