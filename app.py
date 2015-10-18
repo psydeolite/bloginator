@@ -15,11 +15,12 @@ def home():
         c = conn.cursor()
         q = " SELECT * FROM post "
         results = c.execute(q)
-
         loggedin = False
         if 'username' in session:
             loggedin = True
-        uname = "issue"
+            uname = session['username']
+        else:
+            uname = ""
         return render_template("home.html", results=results, loggedin=loggedin, uname=uname)
     else: 
         button = request.form['button']
