@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 
 <html>
-  <h2>Post Something</h2>
+  <h1>Post Something</h1>
 
   <title> Write A Post </title>
+
+   {% if err %}
+   <hr>
+   <h3> {{err}} </h3>
+   <hr>
+   {% endif %}
+
   <hr>
   <form method="POST"> 
        Post Title:<br> <input type="text" name="title"> <br><br><hr>

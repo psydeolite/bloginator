@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, request, redirect, url_for
 import sqlite3
 import auth
 import data_david
+import mods
 
 app = Flask(__name__)
 
@@ -65,10 +66,30 @@ def logout():
     del session['username']
     return redirect(url_for("home"))
 
-@app.route("/create/post/")
-@app.route("/create/post")
+@app.route("/create/post", methods=["GET","POST"])
+@app.route("/create/post/", methods=["GET","POST"])
+
 def create_post():
-    return render_template("write_post.html")
+    if 'username' not in session:
+        return """<h2> You must login in to write a post. </h2> <br><hr><br><a href = "/login">Login Here</a>""" 
+    else:
+        if request.method == "GET":
+            return render_template("write_post.html")
+        else:
+            title = request.form['title']
+            body = request.form['body']
+            button = request.form['button']
+
+            if button == "Cancel":
+                return render_template('write_post.html')
+            elif title == "" or body == "":
+                err = "Error: Title and Body must have text." 
+                return render_template("write_post.html", err = err)
+            else:
+                uname = session['username']
+                mods.add_post(body, title, uname, "12/12/12")
+                return redirect(url_for("home"))
+
 
 @app.route("/create/account/")
 @app.route("/create/account")
