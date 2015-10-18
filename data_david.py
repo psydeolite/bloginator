@@ -3,11 +3,11 @@ import sqlite3
 def make_table():
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
-	q = "create table if not exists users(uname text, pword text, userid integer, rname text)"
+	q = "create table if not exists users(username text, password text, u_id integer, name text)"
         c.execute(q)
-        q = "create table if not exists post(words text, postid integer, authorid integer, date text)"
+        q = "create table if not exists post(words text, postid integer, authorid integer, title text)"
         c.execute(q)
-        q = "create table if not exists comment(words text, postid integer, commid integer, authorid integer, date text)"
+        q = "create table if not exists comment(words text, postid integer, commid integer, authorid integer)"
         c.execute(q)
         con.commit()
 
@@ -33,12 +33,22 @@ def add_user(uname, pword, userid, rname):
 def delete_user(uname, pword):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    q = "SELECT user.userid FROM user WHERE uname = '{}' and pword = '{}'".format(uname,pword)
+    q = " SELECT * FROM users "
     result = c.execute(q)
-    q = " DELETE * FROM user where uname = '{}' and pword = '{}'".format(uname,pword)
+    for r in result:
+        print r
+        print "\n"
+    q = "SELECT users.u_id FROM users WHERE username = '{}' and password = '{}'".format(uname,pword)
+    result = c.execute(q)
+    q = " DELETE FROM users where username = '{}' and password = '{}'".format(uname,pword)
     c.execute(q)
-    q = " DELETE * FROM post where authorid = '{}'".format(result)
-    c.exeucte(q)
+    q = " DELETE FROM post where authorid = '{}'".format(result)
+    c.execute(q)
+    q = " SELECT * FROM users "
+    result = c.execute(q)
+    for r in result:
+        print r
+        print "\n"
     con.commit()
 
 def all_user():
@@ -48,7 +58,7 @@ def all_user():
                 print r
                 print"\n"
 #------------------------------COMMENT TABLES-----------------------------------
-def add_comment(words, postid, commid, authorid, date):
+def add_comment(words, postid, commid, authorid):
 	con = sqlite3.connect("database.db")
 	c = con.cursor()
 	q = "SELECT * FROM comment "
@@ -56,7 +66,7 @@ def add_comment(words, postid, commid, authorid, date):
 	for r in result:
 		print r
 		print "\n"
-	q = "INSERT INTO comment VALUES ('{}','{}','{}','{}','{}')".format(words, postid, commid, authorid, date)
+	q = "INSERT INTO comment VALUES ('{}','{}','{}','{}')".format(words, postid, commid, authorid)
 	c.execute(q)
 	q = " SELECT * FROM comment"
 	result = c.execute(q)
@@ -68,14 +78,18 @@ def add_comment(words, postid, commid, authorid, date):
 def delete_comment(authorid,commid):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    q = "SELECT * FROM comment WHERE authorid='{}' AND commid = '{}'".format(authorid,commid)
+    q = " SELECT * FROM comment"
+    result = c.execute(q)
+    for r in result:
+        print r
+        print "\n"
+    q = "DELETE FROM comment WHERE authorid = '{}' and commid = '{}'".format(authorid,commid)
     c.execute(q)
-    p = c.fetchone()
-    if p is None:
-        return False
-    else:
-        q = "UPDATE comment SET words = '{}' WHERE authorid = '{}' AND postid = '{}'".format("This comment is no longer viewable",authorid,commid)
-        c.execute(q)
+    q = " SELECT * FROM comment"
+    result = c.execute(q)
+    for r in result:
+        print r
+        print "\n"
     con.commit()
 
 def all_comment():
@@ -136,10 +150,12 @@ def all_post():
 
 con = sqlite3.connect("database.db")
 c = con.cursor()
+make_table()
 c.execute("DELETE FROM post")
 c.execute("DELETE FROM users")
 c.execute("DELETE FROM comment")
 con.commit()
+<<<<<<< HEAD:data_david.py
 make_table()
 add_post("Hello there","1","authorid","1/1/11")
 add_post("Oh hi", "2", "authorid", "1/2/12")
@@ -151,6 +167,22 @@ add_user("nspektor", "bootstrap", 2222, "Nellie Spektor")
 
 
 print("Official Results: \n--------------------------------")
+=======
+add_comment("alsdfughlkasdbggfadgr",1,258,786)
+delete_comment(786,324)
+delete_comment(1,258)
+delete_comment(786,258)
+add_comment("HIYA GUYS", 123, 456, 789)
+add_user("greg","gerg",2271, "Gregory Redozubov")
+delete_user("greg","erg")
+delete_user("erg","gerg")
+delete_user("greg","gerg")
+add_post("HI",1,2,"BYE")
+delete_post(1,3)
+delete_post(2,2)
+delete_post(1,2)
+print("--------------------------------")
+>>>>>>> 86bdfae627968d7082a9acdb635e2e21a0a48f97:data2.py
 all_user()
 print("-----------------------------------")
 all_post()
