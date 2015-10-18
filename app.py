@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect, url_for
 
 import sqlite3
 import auth
-import data2
+import data_david
 
 app = Flask(__name__)
 

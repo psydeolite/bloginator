@@ -155,19 +155,18 @@ c.execute("DELETE FROM post")
 c.execute("DELETE FROM users")
 c.execute("DELETE FROM comment")
 con.commit()
-<<<<<<< HEAD:data_david.py
 make_table()
 add_post("Hello there","1","authorid","1/1/11")
 add_post("Oh hi", "2", "authorid", "1/2/12")
 add_post("Testing testing", "3", "authorid", "1/3/13")
-add_comment("HIYA GUYS", 123, 456, 789, "10/16/15")
+add_comment("HIYA GUYS", 123, 456, 789)
 add_user("greg","gerg",2271, "Gregory Redozubov")
 add_user("drothblatt", "cronut123", 2589, "David Rothblatt")
 add_user("nspektor", "bootstrap", 2222, "Nellie Spektor") 
 
 
 print("Official Results: \n--------------------------------")
-=======
+
 add_comment("alsdfughlkasdbggfadgr",1,258,786)
 delete_comment(786,324)
 delete_comment(1,258)
@@ -182,7 +181,7 @@ delete_post(1,3)
 delete_post(2,2)
 delete_post(1,2)
 print("--------------------------------")
->>>>>>> 86bdfae627968d7082a9acdb635e2e21a0a48f97:data2.py
+
 all_user()
 print("-----------------------------------")
 all_post()
