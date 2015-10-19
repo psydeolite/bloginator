@@ -2,9 +2,12 @@ from flask import Flask, render_template, session, request, redirect, url_for
 
 import sqlite3
 import auth
-import mods
+import data_david
+
+data_david.make_table()
 
 app = Flask(__name__)
+
 
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
@@ -75,7 +78,6 @@ def logout():
 
 @app.route("/create/post", methods=["GET","POST"])
 @app.route("/create/post/", methods=["GET","POST"])
-
 def create_post():
     if 'username' not in session:
         return """<h2> You must login in to write a post. </h2> <br><hr><br><a href = "/login">Login Here</a>""" 
@@ -94,7 +96,7 @@ def create_post():
                 return render_template("write_post.html", err = err)
             else:
                 uname = session['username']
-                mods.add_post(body, title, uname, "12/12/12")
+                data_david.add_post(body, uname,title)
                 return redirect(url_for("home"))
 
 
@@ -131,7 +133,7 @@ def create_account():
                             err = "Username already exists."
                             return render_template("create_account.html", err = err)
                     # should be good to add
-                    mods.add_user(username, password, 1232, "hefhebf")
+                    data_david.add_user(username, password, "hefhebf")
                     return redirect(url_for("home"))
 
 

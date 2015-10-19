@@ -38,6 +38,7 @@
        {% for comment in comments %}
        {% if comment[1] == entry[2] %}
        {{comment[2]}}:{{comment[0]}}
+       <br>
        {% endif %}
        {% endfor %}
     </p>
