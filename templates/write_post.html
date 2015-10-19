@@ -4,34 +4,23 @@
   <title>Write A Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/c\
-ss/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.j\
-s"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.\
-js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <div class="container">
   <h2>Post Something</h2>
-  {% if err %}
-  <h3> {{err}} </h3>
-  <hr>
-  {% endif %}
-  <form role="form" method="POST">
+  <form role="form">
     <div class="form-group">
       <label for="Title">Post Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter a Title" name="title">
+      <input type="text" class="form-control" id="title" placeholder="Enter a title" name="title">
     </div>
     <div class="form-group">
-      <label for="body">Post Body:</label>
-      <textarea cols="50" rows="4" name="body">  
-     </textarea>
-eholder="Enter password">
+      <label for="body">Post:</label>
+      <textarea class="form-control" rows="5" id="body" placeholder="Write your post"></textarea>
     </div>
-    <button type="submit" name="button" value="Enter" class="btn btn-default">Enter</button>
-    <button type="submit" name="button" value="Enter" class="btn btn-default">Cancel</button>
   </form>
 </div>
 
