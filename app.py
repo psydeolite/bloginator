@@ -134,6 +134,8 @@ def create_account():
                             return render_template("create_account.html", err = err)
                     # should be good to add
                     data_david.add_user(username, password, "hefhebf")
+                    if 'username' not in session:
+                        session['username'] = uname
                     return redirect(url_for("home"))
 
 
