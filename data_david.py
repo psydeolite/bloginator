@@ -20,7 +20,7 @@ def add_user(uname, pword, rname):
     #for r in result:
         #print r
         #print "\n"
-    q = "INSERT INTO users VALUES('{}','{}','{}')".format(uname, pword, rname)
+    q = """INSERT INTO users VALUES('{}','{}','{}')""".format(uname, pword, rname)
     c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
@@ -38,9 +38,9 @@ def delete_user(uname, pword):
     #for r in result:
         #print r
         #print "\n"
-    q = " DELETE FROM users where username = '{}' and password = '{}'".format(uname,pword)
+    q = """" DELETE FROM users where username = '{}' and password = '{}'""".format(uname,pword)
     c.execute(q)
-    q = " DELETE FROM post where aname = '{}'".format(uname)
+    q = """ DELETE FROM post where aname = '{}'""".format(uname)
     c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
@@ -64,7 +64,7 @@ def add_comment(words,ptitle,aname):
 	#for r in result:
 		#print r
 		#print "\n"
-	q = "INSERT INTO comment VALUES ('{}','{}','{}')".format(words, ptitle, aname)
+	q = """INSERT INTO comment VALUES ('{}','{}','{}')""".format(words, ptitle, aname)
 	c.execute(q)
 	#q = " SELECT * FROM comment"
 	#result = c.execute(q)
@@ -81,7 +81,7 @@ def delete_comment(aname,ptitle):
     #for r in result:
         #print r
         #print "\n"
-    q = "DELETE FROM comment WHERE aname = '{}' and ptitle = '{}'".format(aname,ptitle)
+    q = """DELETE FROM comment WHERE aname = '{}' and ptitle = '{}'""".format(aname,ptitle)
     c.execute(q)
     #q = " SELECT * FROM comment"
     #result = c.execute(q)
@@ -106,7 +106,7 @@ def add_post(words,aname,title):
         #for r in result:
                 #print r
                 #print"\n"
-        q = "INSERT INTO post VALUES('{}','{}','{}')".format(words,aname,title)
+        q = """INSERT INTO post VALUES('{}','{}','{}')""".format(words,aname,title)
         c.execute(q)
         #q = " SELECT * FROM post"
         #result = c.execute(q)
@@ -123,13 +123,13 @@ def delete_post(title,aname):
         #for r in result:
                 #print r
                 #print"\n"
-        q = "SELECT * FROM post WHERE aname='{}' AND title = '{}'".format(aname,title)
+        q = """SELECT * FROM post WHERE aname='{}' AND title = '{}'""".format(aname,title)
         c.execute(q)
         p = c.fetchone()
         if p is None:
                 return False
         else:
-                q = "UPDATE post SET words = '{}' WHERE aname = '{}' AND title = '{}'".format("This post is no longer viewable",aname,title)
+                q = """UPDATE post SET words = '{}' WHERE aname = '{}' AND title = '{}'""".format("This post is no longer viewable",aname,title)
                 c.execute(q)
                 con.commit()
         #q = " SELECT * FROM post"

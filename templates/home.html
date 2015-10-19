@@ -35,13 +35,13 @@
         {{entry[0]}}
 	<br>
 	<form method = "POST">
-	  <button name = "button" type="submit" class="btn" value="comment">Comment</button>
+	  <button name ="button" type="submit" class="btn" value={{entry[2]}}>Comment</button>
 	</form>
     </p>
     <p>
        {% for comment in comments %}
        {% if comment[1] == entry[2] %}
-       {{comment[2]}}:{{comment[0]}}
+       {{comment[2]}}: {{comment[0]}}
        <br>
        {% endif %}
        {% endfor %}

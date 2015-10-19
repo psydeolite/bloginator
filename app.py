@@ -44,7 +44,8 @@ def home():
             return redirect(url_for("create_post"))
         elif button == "create_account":
             return redirect(url_for("create_account"))
-        elif button == "comment":
+        else:
+            session['post_title'] = button
             return redirect(url_for("create_comment"))
 
 
@@ -145,20 +146,22 @@ def create_comment():
         return """<h2> You must login in to write a comment. </h2> <br><hr><br><a href = "/login">Login Here</a>""" 
     else:
         if request.method == "GET":
-            return render_template("comment_post.html")
+            if session['post_title'] != "":
+                return render_template("comment_post.html")
+            else:
+                return """<h2> You must select a post to comment on. </h2> <br><hr><br><a href = "/home">View Posts Here</a>"""
         else:
-            ptitle = request.form['title']
             body = request.form['body']
             button = request.form['button']
-
             if button == "Cancel":
                 return render_template('comment_post.html')
-            elif ptitle == "" or body == "":
-                err = "Error: Title and Body must have text." 
+            elif body == "":
+                err = "Error: Body must have text." 
                 return render_template("write_post.html", err = err)
             else:
                 aname = session['username']
-                data_david.add_comment(body,ptitle,aname)
+                data_david.add_comment(body,session['post_title'],aname)
+                session['post_title'] = ""
                 return redirect(url_for("home"))
 
 @app.route("/blog")
