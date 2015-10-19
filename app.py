@@ -91,7 +91,7 @@ def create_post():
             body = request.form['body']
             button = request.form['button']
 
-            if button == "Cancel":
+            if button == "cancel":
                 return render_template('write_post.html')
             elif title == "" or body == "":
                 err = "Error: Title and Body must have text." 

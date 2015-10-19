@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Write A Post</title>
+  <title>Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -9,26 +9,24 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-  {% if err %}
-  <hr>
-  <h3> {{err}} </h3>
-  <hr>
-  {% endif %}
   <div class="container">
     <h2>Post Something</h2>
-    <form role="form">
+    {% if err %}
+    <h3> {{err}} </h3>
+    <hr>
+    {% endif %}
+    <form role="form" method="POST">
       <div class="form-group">
-	<label for="Title">Post Title:</label>
+	<label for="title">Post Title:</label>
 	<input type="text" class="form-control" id="title" placeholder="Enter a title" name="title">
       </div>
       <div class="form-group">
 	<label for="body">Post:</label>
 	<textarea class="form-control" rows="5" id="body" placeholder="Write your post"></textarea>
       </div>
+      <button type="submit" name="post" class="btn btn-default">Post</button>
+      <button type="submit" name="cancel" class="btn btn-default">Cancel</button>
     </form>
-    
-    <button type="button" class="btn btn-default">Post</button>
-    <button type="button" class="btn btn-default">Cancel</button>
   </div>
   
 </body>
