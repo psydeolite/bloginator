@@ -29,10 +29,10 @@ def home():
         loggedin = False
         if 'username' in session:
             loggedin = True
-            uname = session['username']
+            username = session['username']
         else:
-            uname = ""
-        return render_template("home.html", entries=entries, loggedin=loggedin, uname=uname, comments=comments)
+            username = ""
+        return render_template("home.html", entries=entries, loggedin=loggedin, uname=username, comments=comments)
     else: 
         button = request.form['button']
         print button
@@ -56,16 +56,16 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     else:
-        uname = request.form['username']
-        pword = request.form['password']
+        username = request.form['username']
+        password = request.form['password']
         button = request.form['button']
 
         if button=="cancel":
             return render_template('login.html')
 
-        if auth.authenticate(uname, pword):
+        if auth.authenticate(username, password):
             if 'username' not in session:
-                session['username'] = uname
+                session['username'] = username
                 return redirect(url_for("home"))
         else:
             err = "INVALID USERNAME OR PASSWORD!!"
@@ -96,8 +96,8 @@ def create_post():
                 err = "Error: Title and Body must have text." 
                 return render_template("write_post.html", err = err)
             else:
-                uname = session['username']
-                data_david.add_post(body, uname,title)
+                username = session['username']
+                data_david.add_post(body, username, title)
                 return redirect(url_for("home"))
 
 
@@ -135,7 +135,7 @@ def create_account():
                     # should be good to add
                     data_david.add_user(username, password, "hefhebf")
                     if 'username' not in session:
-                        session['username'] = uname
+                        session['username'] = username
                     return redirect(url_for("home"))
 
 @app.route("/create/comment", methods=["GET","POST"])
