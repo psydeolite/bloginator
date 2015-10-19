@@ -153,12 +153,12 @@ def create_comment():
 
             if button == "Cancel":
                 return render_template('comment_post.html')
-            elif title == "" or body == "":
+            elif ptitle == "" or body == "":
                 err = "Error: Title and Body must have text." 
                 return render_template("write_post.html", err = err)
             else:
                 aname = session['username']
-                data_david.add_post(body,ptitle,aname)
+                data_david.add_comment(body,ptitle,aname)
                 return redirect(url_for("home"))
 
 @app.route("/blog")
