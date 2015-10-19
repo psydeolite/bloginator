@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-
-<html>
-  <h1>What Would You Like to Say</h1>
-
-  <title> Write A Comment </title>
+<html lang="en">
+<head>
+  <title>Write A Comment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
 
    {% if err %}
    <hr>
@@ -12,21 +17,20 @@
    {% endif %}
 
   <hr>
-  <form method="POST"> 
-       <br>
-       Comment Body:<br>  <textarea cols="50" rows="4" name="body">  
-       </textarea>
-       <br><br>
-       <input type="submit" name="button" value="Enter">
-       <input type="submit" name="button" value="Cancel">
-
+<div class="container">
+  <h2>What would you like to say?</h2>
+  <form role="form">
+    <div class="form-group">
+      <label for="body">Comment:</label>
+      <textarea class="form-control" rows="5" id="body" placeholder="Write your comment"></textarea>
+    </div>
   </form>
 
 
+<button type="button" class="btn btn-default">Comment</button>
+<button type="button" class="btn btn-default">Cancel</button>
 
+</div>
 
-
-
-
-
+</body>
 </html>
