@@ -1,9 +1,9 @@
 # bloginator
 Bloginator: First Soft Dev Project
 
-*Members*:
-
-    Gregory Redozubov
-    Michael Rivera
-    David Rothblatt
-    Nellie Spektor
+|Members|Roles|
+|-------|-----|
+|David Rothblatt|Leader, pretty much worked in every sector|
+|Michael Rivera|Backend & middleware, mostly|
+|Gregory Redozubov|Backend|
+|Nellie Spektor|Frontend|
