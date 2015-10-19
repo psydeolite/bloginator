@@ -19,17 +19,14 @@
   <hr>
 <div class="container">
   <h2>What would you like to say?</h2>
-  <form role="form">
+  <form role="form" method="POST">
     <div class="form-group">
       <label for="body">Comment:</label>
-      <textarea class="form-control" rows="5" id="body" placeholder="Write your comment"></textarea>
+      <textarea name="body" class="form-control" rows="5" id="body" placeholder="Write your comment"></textarea>
     </div>
+    <input type="submit" name="Post" class="btn btn-default" value="Post"></input>
+    <input type="submit" name="Cancel" class="btn btn-default" value="Cancel"></input>
   </form>
-
-
-<button type="button" class="btn btn-default">Comment</button>
-<button type="button" class="btn btn-default">Cancel</button>
-
 </div>
 
 </body>

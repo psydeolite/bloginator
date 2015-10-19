@@ -33,7 +33,7 @@ def home():
         else:
             username = ""
         return render_template("home.html", entries=entries, loggedin=loggedin, uname=username, comments=comments)
-    else: 
+    else:
         button = request.form['button']
         print button
         if button == "login":
@@ -87,11 +87,11 @@ def create_post():
         if request.method == "GET":
             return render_template("write_post.html")
         else:
-            title = request.form['title']
-            body = request.form['body']
-            button = request.form['button']
+            title = request.form.get('title')
+            body = request.form.get('body')
+            button = request.form.get('button')
 
-            if button == "cancel":
+            if button == "Cancel":
                 return render_template('write_post.html')
             elif title == "" or body == "":
                 err = "Error: Title and Body must have text." 
@@ -147,12 +147,13 @@ def create_comment():
     else:
         if request.method == "GET":
             if session['post_title'] != "":
+                print session['post_title']
                 return render_template("comment_post.html")
             else:
                 return """<h2> You must select a post to comment on. </h2> <br><hr><br><a href = "/home">View Posts Here</a>"""
         else:
-            body = request.form['body']
-            button = request.form['button']
+            body = request.form.get('body')
+            button = request.form.get('button')
             if button == "Cancel":
                 return render_template('comment_post.html')
             elif body == "":
