@@ -57,9 +57,9 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     else:
-        username = request.form['username']
-        password = request.form['password']
-        button = request.form['button']
+        username = request.form.get('username')
+        password = request.form.get('password')
+        button = request.form.get('button')
 
         if button=="cancel":
             return render_template('login.html')
