@@ -42,9 +42,10 @@ def home():
             return redirect(url_for("logout"))
         elif button == "write_post":
             return redirect(url_for("create_post"))
-
         elif button == "create_account":
             return redirect(url_for("create_account"))
+        elif button == "comment":
+            return redirect(url_for("create_comment"))
 
 
 
@@ -102,7 +103,6 @@ def create_post():
 
 @app.route("/create/account", methods=["GET","POST"])
 @app.route("/create/account/", methods=["GET","POST"])
-
 def create_account():
         if 'username' in session:
             return "<h1> You are already signed in </h1>"
@@ -138,7 +138,28 @@ def create_account():
                         session['username'] = uname
                     return redirect(url_for("home"))
 
+@app.route("/create/comment", methods=["GET","POST"])
+@app.route("/create/comment/", methods=["GET","POST"])
+def create_comment():
+    if 'username' not in session:
+        return """<h2> You must login in to write a comment. </h2> <br><hr><br><a href = "/login">Login Here</a>""" 
+    else:
+        if request.method == "GET":
+            return render_template("comment_post.html")
+        else:
+            ptitle = request.form['title']
+            body = request.form['body']
+            button = request.form['button']
 
+            if button == "Cancel":
+                return render_template('comment_post.html')
+            elif title == "" or body == "":
+                err = "Error: Title and Body must have text." 
+                return render_template("write_post.html", err = err)
+            else:
+                aname = session['username']
+                data_david.add_post(body,ptitle,aname)
+                return redirect(url_for("home"))
 
 @app.route("/blog")
 @app.route("/blog/")

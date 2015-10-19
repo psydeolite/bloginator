@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+  <h1>What Would You Like to Say</h1>
+
+  <title> Write A Comment </title>
+
+   {% if err %}
+   <hr>
+   <h3> {{err}} </h3>
+   <hr>
+   {% endif %}
+
+  <hr>
+  <form method="POST"> 
+       Post Title:<br> <input type="text" name="title"> <br><br><hr>
+       Comment Body:<br>  <textarea cols="50" rows="4" name="body">  
+       </textarea>
+       <br><br>
+       <input type="submit" name="button" value="Enter">
+       <input type="submit" name="button" value="Cancel">
+
+  </form>
+
+
+
+
+
+
+
+
+</html>
