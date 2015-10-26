@@ -1,9 +1,8 @@
-import sqlite3
+from pymongo import Connection
 
 def authenticate(uname,pword):
-    conn = sqlite3.connect("database.db")
-    c = conn.cursor()
-
+    connection = Connection('localhost',5000)
+    db = connections.database
     q = " SELECT * FROM users "
     result = c.execute(q)
     for r in result:
