@@ -119,49 +119,60 @@ def delete_comment(aname,ptitle):
 def all_comment():
     connection = MongoClient()
     db = connection.database
-    return db.comment.find()
-    
+    comment = db.comment
+    result = comment.find()
     #q = " SELECT * FROM comment"
     #result = c.execute(q)
-    #for r in result:
-    #    print r
-    #    print"\n"
+    for r in result:
+        print r
+        print"\n"
+        
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
-        con = sqlite3.connect("database.db")
-        c = con.cursor()
+        connection = MongoClient()
+        db = connection.database
+        post = db.post
+        post.insert({"words":words,"title":title,"aname":aname})
+        
+        #con = sqlite3.connect("database.db")
+        #c = con.cursor()
         #q = " SELECT * FROM post "
         #result = c.execute(q)
         #for r in result:
                 #print r
                 #print"\n"
-        q = """INSERT INTO post VALUES('{}','{}','{}')""".format(words,aname,title)
-        c.execute(q)
+        #q = """INSERT INTO post VALUES('{}','{}','{}')""".format(words,aname,title)
+        #c.execute(q)
         #q = " SELECT * FROM post"
         #result = c.execute(q)
         #for r in result:
                 #print r
                 #print"\n"
-        con.commit()
+        #con.commit()
 
 def delete_post(title,aname):
-        con = sqlite3.connect("database.db")
-        c = con.cursor()
+        connection = MongoClient()
+        db = connection.database
+        post = db.post
+        post.remove({"aname":aname,"ptitle":ptitle})
+        
+        #con = sqlite3.connect("database.db")
+        #c = con.cursor()
         #q = " SELECT * FROM post"
         #result = c.execute(q)
         #for r in result:
                 #print r
                 #print"\n"
-        q = """SELECT * FROM post WHERE aname='{}' AND title = '{}'""".format(aname,title)
-        c.execute(q)
-        p = c.fetchone()
-        if p is None:
-                return False
-        else:
-                q = """UPDATE post SET words = '{}' WHERE aname = '{}' AND title = '{}'""".format("This post is no longer viewable",aname,title)
-                c.execute(q)
-                con.commit()
+        #q = """SELECT * FROM post WHERE aname='{}' AND title = '{}'""".format(aname,title)
+        #c.execute(q)
+        #p = c.fetchone()
+        #if p is None:
+                #return False
+        #else:
+                #q = """UPDATE post SET words = '{}' WHERE aname = '{}' AND title = '{}'""".format("This post is no longer viewable",aname,title)
+                #c.execute(q)
+                #con.commit()
         #q = " SELECT * FROM post"
         #result = c.execute(q)
         #for r in result:
@@ -169,8 +180,12 @@ def delete_post(title,aname):
                 #print"\n"
 
 def all_post():
-        q = " SELECT * FROM post"
-        result = c.execute(q)
+        connection = MongoClient()
+        db = connection.database
+        post = db.post
+        result = post.find()
+        #q = " SELECT * FROM post"
+        #result = c.execute(q)
         for r in result:
                 print r
                 print"\n"
