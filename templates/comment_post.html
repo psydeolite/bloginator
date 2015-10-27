@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Write a Comment</title>
-  {% include "bootstrap.html" %}
-</head>
-<body>
-
-   {% if err %}
-   <hr>
-   <h3> {{err}} </h3>
-   <hr>
-   {% endif %}
-
-  <hr>
-<div class="container">
-  <h2>What would you like to say?</h2>
-  <form role="form" method="POST">
-    <div class="form-group">
-      <label for="body">Comment:</label>
-      <textarea name="body" class="form-control" rows="5" id="body" placeholder="Write your comment"></textarea>
-    </div>
-    <input type="submit" name="Post" class="btn btn-default" value="Post"></input>
-    <input type="submit" name="Cancel" class="btn btn-default" value="Cancel"></input>
-  </form>
-</div>
-
-</body>
+	<head>
+		<title>Write a Comment</title>
+		{% include "bootstrap.html" %}
+	</head>
+	<body>
+		{% if err %}
+			<hr>
+			<h3> {{err}} </h3>
+			<hr>
+		{% endif %}
+		<hr>
+		<div class="container">
+			<h2>What would you like to say?</h2>
+			<form role="form" method="POST">
+				<div class="form-group">
+					<label for="body">Comment:</label>
+					<textarea name="body" class="form-control" rows="5" id="body" placeholder="Write your comment"></textarea>
+				</div>
+				<input type="submit" name="Post" class="btn btn-default" value="Post"></input>
+				<input type="submit" name="Cancel" class="btn btn-default" value="Cancel"></input>
+			</form>
+		</div>
+	</body>
 </html>
