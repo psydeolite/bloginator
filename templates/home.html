@@ -1,54 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bloginator R3S</title>
-  {% include "bootstrap.html" %}
-</head>
-<body>
-
-<div class="container">
-  <div class="jumbotron">
-    <h1>Bloginator</h1>
-    {% if loggedin %}
-    <h2> Hi there, {{ uname }} </h2>
-    <form method = "POST">
-      <button  name = "button" type="submit" class="btn" value="write_post"> Write Post</button>
-      <button  name = "button" type="submit" class="btn" value="logout"> Log Out</button>
-    </form>
-    {% else %}
-    <form method = "POST">
-      <button  name = "button" type="submit" class="btn" value="login"> Log In </button>
-      <button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
-    </form>
-    {% endif %}
-  </div>
-  <div class="row">
-    <div class="col-sm-4">      
-    {% for entry in entries %}
-
-      <h3> {{entry[2]}} </h3>
-      <h4> by {{entry[1]}} </h4>
-      <p> 
-        {{entry[0]}}
-	<br>
-	<form method = "POST">
-	  <button name ="button" type="submit" class="btn" value="{{entry[2]}}">Comment</button>
-	</form>
-      </p>
-      <p>
-	{% for comment in comments %}
-	{% if comment[1] == entry[2] %}
-	{{comment[2]}}: {{comment[0]}}
-	<br>
-	{% endif %}
-	{% endfor %}
-      </p>
-      <hr>
-      {% endfor %}
-    </div>
-  </div>
-  
-  {{button}}
-  
-</body>
+	<head>
+		<title>Bloginator R3S</title>
+		
+		{% include "bootstrap.html" %}
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Bloginator</h1>
+				
+				{% if loggedin %}
+					<h2>Hi there, {{ uname }}</h2>
+					<form method="POST">
+						<button name="button" type="submit" class="btn" value="write_post">Write Post</button>
+						<button name="button" type="submit" class="btn" value="logout">Log Out</button>
+					</form>
+				{% else %}
+					<form method="POST">
+						<button name="button" type="submit" class="btn" value="login">Log In</button>
+						<button name="button" type="submit" class="btn" value="create_account">Create Account</button>
+					</form>
+				{% endif %}
+				
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					
+					{% for entry in entries %}
+						<h3>{{ entry[2] }}</h3>
+						<h4>by {{ entry[1] }}</h4>
+						<p>
+							{{ entry[0] }}
+							<br>
+							<form method="POST">
+								<button name="button" type="submit" class="btn" value="{{entry[2]}}">Comment</button>
+							</form>
+						</p>
+						<p>
+						
+						{% for comment in comments %}
+							{% if comment[1] == entry[2] %}
+								{{ comment[2] }}: {{ comment[0] }}
+								<br>
+							{% endif %}
+						{% endfor %}
+						
+						</p>
+						<hr>
+					{% endfor %}
+					
+				</div>
+			</div>
+			{{ button }}
+	</body>
 </html>
