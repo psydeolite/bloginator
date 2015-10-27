@@ -4,7 +4,6 @@ def authenticate(uname,pword):
     connection = MongoClient()
     db = connections['database']
     result = db.users.find({'username':uname});
-    for r in result:
-        if uname == r.username and pword == r.password:
+    if uname == result.username and pword == result.password:
             return True
     return False
