@@ -191,20 +191,26 @@ def all_post():
                 print"\n"
 #---------------------------------------------------------------------------------------------
 
-con = sqlite3.connect("database.db")
-c = con.cursor()
+#con = sqlite3.connect("database.db")
+#c = con.cursor()
 make_table()
 #c.execute("DELETE FROM post")
 #c.execute("DELETE FROM users")
 #c.execute("DELETE FROM comment")
-con.commit()
+#con.commit()
 #add_post("Hello there","1","authorid","1/1/11")
 #add_post("Oh hi", "2", "authorid", "1/2/12")
 #add_post("Testing testing", "3", "authorid", "1/3/13")
-#add_comment("HIYA GUYS", 123, 456, 789)
-#add_user("greg","gerg",2271, "Gregory Redozubov")
-#add_user("drothblatt", "cronut123", 2589, "David Rothblatt")
-#add_user("nspektor", "bootstrap", 2222, "Nellie Spektor") 
+add_post("Hello there","1","authorid")
+add_post("Oh hi", "2", "authorid")
+add_post("Testing testing", "3", "authorid")
+all_post()
+add_comment("HIYA GUYS", "123", "456")
+all_comment()
+add_user("greg","gerg", "Gregory Redozubov")
+add_user("drothblatt", "cronut123", "David Rothblatt")
+add_user("nspektor", "bootstrap", "Nellie Spektor")
+all_user()
 
 
 #print("Official Results: \n--------------------------------")
