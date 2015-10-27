@@ -1,15 +1,12 @@
-import sqlite3
+from pymongo import MongoClient
+# import sqlite3
 
 def make_table():
-	con = sqlite3.connect("database.db")
-	c = con.cursor()
-	q = "create table if not exists users(username text, password text, name text)"
-        c.execute(q)
-        q = "create table if not exists post(words text, aname text, title text)"
-        c.execute(q)
-        q = "create table if not exists comment(words text, ptitle text, aname text)"
-        c.execute(q)
-        con.commit()
+    con = MongoClient()
+    db = connection.database
+    users = db.users
+    post = db.post
+    comment = db.comment
 
 # ---------------------------USERS TABLES---------------------------------
 def add_user(uname, pword, rname):
