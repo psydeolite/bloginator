@@ -8,6 +8,14 @@ def make_table():
     post = db.post
     comment = db.comment
 
+    userinfo = {"username":"bloginator","password":"softdev","name":"blogger"}
+    postinfo = {"words":"hello world","aname":"hello","title":"text"}
+    commentinfo = {"words":"Testing!","ptitle":"test","aname":"hello"}
+
+    users.insert(userinfo)
+    post.insert(postinfo)
+    comment.insert(commentinfo)
+
 # ---------------------------USERS TABLES---------------------------------
 def add_user(uname, pword, rname):
     con = sqlite3.connect("database.db")
