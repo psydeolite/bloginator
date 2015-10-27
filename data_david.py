@@ -76,8 +76,9 @@ def add_comment(words,ptitle,aname):
     connection = MongoClient()
     db = connection.database
     comment = db.comment
-    comment.insert({"words":words,"ptitle":ptitle,"aname":aname})
-	#con = sqlite3.connect("database.db")
+    c = {"words":words,"ptitle":ptitle,"aname":aname}
+    comment.insert(c)
+    #con = sqlite3.connect("database.db")
 	#c = con.cursor()
 	#q = "SELECT * FROM comment "
 	#result = c.execute(q)
@@ -97,7 +98,8 @@ def delete_comment(aname,ptitle):
     connection = MongoClient()
     db = connection.database
     comment = db.comment
-    comment.remove({"aname":aname,"ptitle":ptitle})
+    words = db.find({"aname":aname,"ptitle":ptitle})
+    comment.remove({"words":words,"aname":aname,"ptitle":ptitle})
     #con = sqlite3.connect("database.db")
     #c = con.cursor()
     #q = " SELECT * FROM comment"
@@ -115,15 +117,16 @@ def delete_comment(aname,ptitle):
     #con.commit()
 
 def all_comment():
-        connection = MongoClient()
-        db = connection.database
-        comment = db.comment
-        result = comment.find()
-        #q = " SELECT * FROM comment"
-        #result = c.execute(q)
-        for r in result:
-                print r
-                print"\n"
+    connection = MongoClient()
+    db = connection.database
+    comment = db.comment
+    result = comment.find()
+    #q = " SELECT * FROM comment"
+    #result = c.execute(q)
+    for r in result:
+        print r
+        print"\n"
+        
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
@@ -210,6 +213,7 @@ def all_post():
 #con = sqlite3.connect("database.db")
 #c = con.cursor()
 #make_table()
+make_table()
 #c.execute("DELETE FROM post")
 #c.execute("DELETE FROM users")
 #c.execute("DELETE FROM comment")
@@ -217,10 +221,16 @@ def all_post():
 #add_post("Hello there","1","authorid","1/1/11")
 #add_post("Oh hi", "2", "authorid", "1/2/12")
 #add_post("Testing testing", "3", "authorid", "1/3/13")
-#add_comment("HIYA GUYS", 123, 456, 789)
-#add_user("greg","gerg",2271, "Gregory Redozubov")
-#add_user("drothblatt", "cronut123", 2589, "David Rothblatt")
-#add_user("nspektor", "bootstrap", 2222, "Nellie Spektor") 
+add_post("Hello there","1","authorid")
+add_post("Oh hi", "2", "authorid")
+add_post("Testing testing", "3", "authorid")
+all_post()
+add_comment("HIYA GUYS", "123", "456")
+all_comment()
+add_user("greg","gerg", "Gregory Redozubov")
+add_user("drothblatt", "cronut123", "David Rothblatt")
+add_user("nspektor", "bootstrap", "Nellie Spektor")
+all_user()
 
 
 #print("Official Results: \n--------------------------------")
