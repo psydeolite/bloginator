@@ -115,25 +115,31 @@ def all_comment():
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
-        con = sqlite3.connect("database.db")
-        c = con.cursor()
+    con=MongoClient()
+    db=connection.database
+    post=db.post
+    postinfo={'words':words,'aname':aname,'title':title}
+    post.insert(postinfo)
+    ##con = sqlite3.connect("database.db")
+        ##c = con.cursor()
         #q = " SELECT * FROM post "
         #result = c.execute(q)
         #for r in result:
                 #print r
                 #print"\n"
-        q = """INSERT INTO post VALUES('{}','{}','{}')""".format(words,aname,title)
-        c.execute(q)
+        ##q = """INSERT INTO post VALUES('{}','{}','{}')""".format(words,aname,title)
+        ##c.execute(q)
         #q = " SELECT * FROM post"
         #result = c.execute(q)
         #for r in result:
                 #print r
                 #print"\n"
-        con.commit()
+        ##con.commit()
 
 def delete_post(title,aname):
-        con = sqlite3.connect("database.db")
-        c = con.cursor()
+    con=MongoClient()
+    ##con = sqlite3.connect("database.db")
+        ##c = con.cursor()
         #q = " SELECT * FROM post"
         #result = c.execute(q)
         #for r in result:
@@ -155,20 +161,24 @@ def delete_post(title,aname):
                 #print"\n"
 
 def all_post():
-        q = " SELECT * FROM post"
-        result = c.execute(q)
-        for r in result:
-                print r
-                print"\n"
+    con=MongoClient()
+    db=con.database
+    posts=db.post.find()
+    return posts
+    #q = " SELECT * FROM post"
+        #result = c.execute(q)
+        #for r in result:
+         #       print r
+          #      print"\n"
 #---------------------------------------------------------------------------------------------
 
-con = sqlite3.connect("database.db")
-c = con.cursor()
-make_table()
+#con = sqlite3.connect("database.db")
+#c = con.cursor()
+#make_table()
 #c.execute("DELETE FROM post")
 #c.execute("DELETE FROM users")
 #c.execute("DELETE FROM comment")
-con.commit()
+#con.commit()
 #add_post("Hello there","1","authorid","1/1/11")
 #add_post("Oh hi", "2", "authorid", "1/2/12")
 #add_post("Testing testing", "3", "authorid", "1/3/13")
