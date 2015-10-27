@@ -73,45 +73,59 @@ def all_user():
         print"\n"
 #------------------------------COMMENT TABLES-----------------------------------
 def add_comment(words,ptitle,aname):
-	con = sqlite3.connect("database.db")
-	c = con.cursor()
+    connection = MongoClient()
+    db = connection.database
+    comment = db.comment
+    c = {"words":words,"ptitle":ptitle,"aname":aname}
+    comment.insert(c)
+    #con = sqlite3.connect("database.db")
+	#c = con.cursor()
 	#q = "SELECT * FROM comment "
 	#result = c.execute(q)
 	#for r in result:
 		#print r
 		#print "\n"
-	q = """INSERT INTO comment VALUES ('{}','{}','{}')""".format(words, ptitle, aname)
-	c.execute(q)
+	#q = """INSERT INTO comment VALUES ('{}','{}','{}')""".format(words, ptitle, aname)
+	#c.execute(q)
 	#q = " SELECT * FROM comment"
 	#result = c.execute(q)
 	#for r in result:
 		#print r
 		#print "\n"
-	con.commit()
+	#con.commit()
 
 def delete_comment(aname,ptitle):
-    con = sqlite3.connect("database.db")
-    c = con.cursor()
+    connection = MongoClient()
+    db = connection.database
+    comment = db.comment
+    words = db.find({"aname":aname,"ptitle":ptitle})
+    comment.remove({"words":words,"aname":aname,"ptitle":ptitle})
+    #con = sqlite3.connect("database.db")
+    #c = con.cursor()
     #q = " SELECT * FROM comment"
     #result = c.execute(q)
     #for r in result:
         #print r
         #print "\n"
-    q = """DELETE FROM comment WHERE aname = '{}' and ptitle = '{}'""".format(aname,ptitle)
-    c.execute(q)
+    #q = """DELETE FROM comment WHERE aname = '{}' and ptitle = '{}'""".format(aname,ptitle)
+    #c.execute(q)
     #q = " SELECT * FROM comment"
     #result = c.execute(q)
     #for r in result:
         #print r
         #print "\n"
-    con.commit()
+    #con.commit()
 
 def all_comment():
-        q = " SELECT * FROM comment"
-        result = c.execute(q)
-        for r in result:
-                print r
-                print"\n"
+    connection = MongoClient()
+    db = connection.database
+    return db.comment.find()
+    
+    #q = " SELECT * FROM comment"
+    #result = c.execute(q)
+    #for r in result:
+    #    print r
+    #    print"\n"
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
