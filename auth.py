@@ -1,11 +1,9 @@
-from pymongo import Connection
+from pymongo import MongoClient
 
 def authenticate(uname,pword):
-    connection = Connection('localhost',5000)
-    db = connections.database
-    q = " SELECT * FROM users "
-    result = c.execute(q)
-    for r in result:
-        if uname == r[0] and pword == r[1]:
+    connection = MongoClient()
+    db = connections['database']
+    result = db.users.find({'username':uname});
+    if uname == result.username and pword == result.password:
             return True
     return False
