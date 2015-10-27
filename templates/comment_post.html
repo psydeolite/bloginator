@@ -2,14 +2,18 @@
 <html lang="en">
 	<head>
 		<title>Write a Comment</title>
+		
 		{% include "bootstrap.html" %}
+		
 	</head>
 	<body>
+		
 		{% if err %}
 			<hr>
-			<h3> {{err}} </h3>
+			<h3>{{ err }}</h3>
 			<hr>
 		{% endif %}
+		
 		<hr>
 		<div class="container">
 			<h2>What would you like to say?</h2>

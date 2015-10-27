@@ -2,14 +2,16 @@
 <html lang="en">
 	<head>
 		<title>Create</title>
+		
 		{% include "bootstrap.html" %}
+		
 	</head>
 	<body>
 		<div class="container">
 			<h2>Create an account</h2>
 			
 			{% if err %}
-				<h3> {{err}} </h3>
+				<h3>{{ err }}</h3>
 			{% endif %}
 			
 			<form role="form" method="POST">
