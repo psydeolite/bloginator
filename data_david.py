@@ -2,7 +2,7 @@ from pymongo import MongoClient
 # import sqlite3
 
 def make_table():
-    con = MongoClient()
+    connection = MongoClient()
     db = connection.database
     users = db.users
     post = db.post
@@ -18,48 +18,59 @@ def make_table():
 
 # ---------------------------USERS TABLES---------------------------------
 def add_user(uname, pword, rname):
-    con = sqlite3.connect("database.db")
-    c = con.cursor()
+    connection = MongoClient()
+    db = connection.database
+    users = db.users
+    userinfo = {"username":uname,"password":pword,"name":rname}
+    users.insert(userinfo)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
     #for r in result:
         #print r
         #print "\n"
-    q = """INSERT INTO users VALUES('{}','{}','{}')""".format(uname, pword, rname)
-    c.execute(q)
+    #q = """INSERT INTO users VALUES('{}','{}','{}')""".format(uname, pword, rname)
+    #c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
     #for r in result:
         #print r
         #print"\n"
-    con.commit()
+    #con.commit()
 
 
 def delete_user(uname, pword):
-    con = sqlite3.connect("database.db")
-    c = con.cursor()
+    connection = MongoClient()
+    db = connection.database
+    users = db.users
+    users.remove({"username":uname,"password":pword})
+    #con = sqlite3.connect("database.db")
+    #c = con.cursor()
     #q = " SELECT * FROM users "
     #result = c.execute(q)
     #for r in result:
         #print r
         #print "\n"
-    q = """" DELETE FROM users where username = '{}' and password = '{}'""".format(uname,pword)
-    c.execute(q)
-    q = """ DELETE FROM post where aname = '{}'""".format(uname)
-    c.execute(q)
+    #q = """" DELETE FROM users where username = '{}' and password = '{}'""".format(uname,pword)
+    #c.execute(q)
+    #q = """ DELETE FROM post where aname = '{}'""".format(uname)
+    #c.execute(q)
     #q = " SELECT * FROM users "
     #result = c.execute(q)
     #for r in result:
         #print r
         #print "\n"
-    con.commit()
+    #con.commit()
 
 def all_user():
-        q = " SELECT * FROM users"
-        result = c.execute(q)
-        for r in result:
-                print r
-                print"\n"
+    connection = MongoClient()
+    db = connection.database
+    users = db.users
+    result = users.find()
+        #q = " SELECT * FROM users"
+        #result = c.execute(q)
+    for r in result:
+        print r
+        print"\n"
 #------------------------------COMMENT TABLES-----------------------------------
 def add_comment(words,ptitle,aname):
 	con = sqlite3.connect("database.db")
