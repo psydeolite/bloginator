@@ -1,3 +1,4 @@
+
 from pymongo import MongoClient
 # import sqlite3
 
@@ -66,7 +67,6 @@ def all_comment():
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
-<<<<<<< HEAD
     con=MongoClient()
     db=connection.database
     post=db.post
@@ -77,10 +77,10 @@ def delete_post(title,aname):
     con=MongoClient()
    
 def delete_post(title,aname):
-        connection = MongoClient()
-        db = connection.database
-        post = db.post
-        post.remove({"aname":aname,"ptitle":ptitle})
+    connection = MongoClient()
+    db = connection.database
+    post = db.post
+    post.remove({"aname":aname,"ptitle":ptitle})
         
    
 def all_post():
@@ -95,6 +95,17 @@ def all_post():
     return result
     
 #---------------------------------------------------------------------------------------------
+
+con=MongoClient()
+db=con.database
+db.user.drop()
+for user in db.users.find():
+    print user
+
+add_user('mg123','pwd','Mariya')
+add_user('321gm','dwp','Ayiram')
+luser=db.users.find()
+#print luser
 
 
 '''add_post("Hello there","1","authorid")
