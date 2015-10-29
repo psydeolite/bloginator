@@ -14,18 +14,27 @@ app = Flask(__name__)
 @app.route("/home/", methods=["GET","POST"])
 def home():
     if request.method == "GET":
-        conn = sqlite3.connect("database.db")
-        c = conn.cursor()
-        q = " SELECT * FROM post "
-        entries = []
-        results = c.execute(q)
-        for r in results:
-            entries.insert(0, r)
-        q = "SELECT * FROM comment"
-        comments = []
-        results = c.execute(q)
-        for r in results:
-            comments.insert(0, r)
+        conn = MongoClient()
+        db = connection.database
+        posts = db.post
+        entries = posts.find()
+        results = db.comment
+        comments = results.find()
+        
+        
+        #conn = sqlite3.connect("database.db")
+        #c = conn.cursor()
+        #q = " SELECT * FROM post "
+        #entries = []
+        #results = c.execute(q)
+        #for r in results:
+        #    entries.insert(0, r)
+        #q = "SELECT * FROM comment"
+        #comments = []
+        #results = c.execute(q)
+        
+        #for r in results:
+        #    comments.insert(0, r)
         loggedin = False
         if 'username' in session:
             loggedin = True
@@ -125,10 +134,14 @@ def create_account():
                     err = "Passwords entered do not match. Try again"
                     return render_template("create_account.html", err = err)
                 else:
-                    con = sqlite3.connect("database.db")
-                    c = con.cursor()
-                    q = " SELECT * FROM users "
-                    result = c.execute(q)
+                    con = MongoClient()
+                    db = connection.database
+                    result = db.users
+                                        
+                    #con = sqlite3.connect("database.db")
+                    #c = con.cursor()
+                    #q = " SELECT * FROM users "
+                    #result = c.execute(q)
                     for r in result:
                         if username == r[0]:
                             err = "Username already exists."
