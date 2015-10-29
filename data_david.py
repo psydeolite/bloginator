@@ -51,8 +51,8 @@ def delete_comment(aname,ptitle):
     connection = MongoClient()
     db = connection.database
     comment = db.comment
-    words = db.find({"aname":aname,"ptitle":ptitle})
-    comment.remove({"words":words,"aname":aname,"ptitle":ptitle})
+    words = comment.find({"aname":aname,"ptitle":ptitle})
+    comment.remove(words)
 
 def all_comment():
     connection = MongoClient()
@@ -66,28 +66,22 @@ def all_comment():
             
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
-<<<<<<< HEAD
     con=MongoClient()
     db=connection.database
     post=db.post
     postinfo={'words':words,'aname':aname,'title':title}
-    post.insert(postinfo)
+    post.insert(postinfo)   
+
    
 def delete_post(title,aname):
-    con=MongoClient()
-   
-def delete_post(title,aname):
-        connection = MongoClient()
-        db = connection.database
-        post = db.post
-        post.remove({"aname":aname,"ptitle":ptitle})
+    connection = MongoClient()
+    db = connection.database
+    posts = db.post
+    postinfo = posts.find({"title":title,"aname":aname})
+    post.remove(postinfo)
         
    
 def all_post():
-    '''con=MongoClient()
-    db=con.database
-    posts=db.post.find()
-    return posts'''
     connection = MongoClient()
     db = connection.database
     post = db.post
