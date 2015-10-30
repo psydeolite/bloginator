@@ -1,0 +1,16 @@
+Good:
+Comments that divided functions by purpose were helpful
+Code was fairly easy to understand
+HTML was well organized
+Cool that you have a cancel button (Y)
+Minimalist design is easy on the eyes
+
+Bad:
+Useless files and functions in code, confusing
+Mixed SQL in app.py even though most of the functionality came from data_david.py
+Test cases that weren't too organized, some don't match function parameters
+A lot of commented code...
+Some variable names were unclear (aname?)
+When you write a post, you need to have text in order to cancel
+Cancel registration doesn't work, nor does cancel 
+Log-in to write a comment page doesn't look nice :'(
