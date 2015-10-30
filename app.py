@@ -144,7 +144,7 @@ def create_account():
                     #result = c.execute(q)
                     for r in result:
                         print r.keys()
-                        if r["u'username"] == r[0]:
+                        if r[u'username'] == r[0]:
                             err = "Username already exists."
                             return render_template("create_account.html", err = err)
                     # should be good to add
