@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-
-import sqlite3
+from pymongo import MongoClient
+#import sqlite3
 import auth
 import data_david
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
         conn = MongoClient()
-        db = connection.database
+        db = conn.database
         posts = db.post
         entries = posts.find()
         results = db.comment
@@ -134,16 +134,17 @@ def create_account():
                     err = "Passwords entered do not match. Try again"
                     return render_template("create_account.html", err = err)
                 else:
-                    con = MongoClient()
-                    db = connection.database
-                    result = db.users
+                    conn = MongoClient()
+                    db = conn.database
+                    result = db.users.find()
                                         
                     #con = sqlite3.connect("database.db")
                     #c = con.cursor()
                     #q = " SELECT * FROM users "
                     #result = c.execute(q)
                     for r in result:
-                        if username == r[0]:
+                        print r.keys()
+                        if r["u'username"] == r[0]:
                             err = "Username already exists."
                             return render_template("create_account.html", err = err)
                     # should be good to add
