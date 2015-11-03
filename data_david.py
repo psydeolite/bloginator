@@ -1,4 +1,4 @@
-
+import json,ast
 from pymongo import MongoClient
 # import sqlite3
 
@@ -36,10 +36,12 @@ def all_user():
     connection = MongoClient()
     db = connection.database
     users = db.users
-    result = users.find()
+    result = users.find({},{"_id":False})
     for r in result:
+        r = ast.literal_eval(json.dumps(r))
         print r
-        print"\n"
+        print "\n"
+
 #------------------------------COMMENT TABLES-----------------------------------
 def add_comment(words,ptitle,aname):
     connection = MongoClient()
@@ -59,7 +61,7 @@ def all_comment():
     connection = MongoClient()
     db = connection.database
     comment = db.comment
-    result = comment.find()
+    result = comment.find({},{"_id":False})
     for r in result:
         print r
         print"\n"
@@ -91,15 +93,15 @@ def all_post():
     
 #---------------------------------------------------------------------------------------------
 
-con=MongoClient()
+"""con=MongoClient()
 db=con.database
 db.user.drop()
 for user in db.users.find():
-    print user
+    print user"""
 
 add_user('mg123','pwd','Mariya')
 add_user('321gm','dwp','Ayiram')
-luser=db.users.find()
+#luser=db.users.find()
 #print luser
 
 
@@ -111,7 +113,6 @@ add_comment("HIYA GUYS", "123", "456")
 all_comment()
 add_user("greg","gerg", "Gregory Redozubov")
 add_user("drothblatt", "cronut123", "David Rothblatt")
-add_user("nspektor", "bootstrap", "Nellie Spektor")
-all_user()'''
-
+add_user("nspektor", "bootstrap", "Nellie Spektor")'''
+all_user()
 
