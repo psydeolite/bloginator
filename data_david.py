@@ -68,7 +68,7 @@ def all_comment():
 #-------------------------------POST TABLES--------------------------------------
 def add_post(words,aname,title):
     con=MongoClient()
-    db=connection.database
+    db=con.database
     post=db.post
     postinfo={'words':words,'aname':aname,'title':title}
     post.insert(postinfo)   

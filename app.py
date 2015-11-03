@@ -18,23 +18,12 @@ def home():
         db = conn.database
         posts = db.post
         entries = posts.find()
+        '''print '\n entries'
+        for e in entries:
+            print e'''
         results = db.comment
         comments = results.find()
         
-        
-        #conn = sqlite3.connect("database.db")
-        #c = conn.cursor()
-        #q = " SELECT * FROM post "
-        #entries = []
-        #results = c.execute(q)
-        #for r in results:
-        #    entries.insert(0, r)
-        #q = "SELECT * FROM comment"
-        #comments = []
-        #results = c.execute(q)
-        
-        #for r in results:
-        #    comments.insert(0, r)
         loggedin = False
         if 'username' in session:
             loggedin = True
@@ -138,13 +127,11 @@ def create_account():
                     db = conn.database
                     result = db.users.find()
                                         
-                    #con = sqlite3.connect("database.db")
-                    #c = con.cursor()
-                    #q = " SELECT * FROM users "
-                    #result = c.execute(q)
                     for r in result:
+                        print '\n---------'
                         print r.keys()
-                        if r[u'username'] == r[0]:
+                        print 'username' in r.keys()
+                        if username==r['username']:
                             err = "Username already exists."
                             return render_template("create_account.html", err = err)
                     # should be good to add
