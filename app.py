@@ -60,7 +60,7 @@ def login():
         button = request.form.get('button')
 
         if button=="cancel":
-            return render_template('login.html')
+            return render_template('home.html')
 
         if auth.authenticate(username, password):
             if 'username' not in session:
@@ -181,4 +181,4 @@ def blog():
 if __name__ == "__main__":
     app.debug = True
     app.secret_key = "cronut"
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=4000)
