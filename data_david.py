@@ -99,10 +99,10 @@ db.user.drop()
 for user in db.users.find():
     print user"""
 
-add_user('mg123','pwd','Mariya')
+"""add_user('mg123','pwd','Mariya')
 add_user('321gm','dwp','Ayiram')
-#luser=db.users.find()
-#print luser
+luser=db.users.find()
+print luser"""
 
 
 '''add_post("Hello there","1","authorid")
@@ -113,6 +113,6 @@ add_comment("HIYA GUYS", "123", "456")
 all_comment()
 add_user("greg","gerg", "Gregory Redozubov")
 add_user("drothblatt", "cronut123", "David Rothblatt")
-add_user("nspektor", "bootstrap", "Nellie Spektor")'''
-all_user()
+add_user("nspektor", "bootstrap", "Nellie Spektor")
+all_user()'''
 
