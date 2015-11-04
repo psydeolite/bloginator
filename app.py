@@ -4,7 +4,6 @@ from pymongo import MongoClient
 import auth
 import data_david
 
-data_david.make_table()
 
 app = Flask(__name__)
 
