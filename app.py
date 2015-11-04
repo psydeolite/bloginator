@@ -22,8 +22,11 @@ def home():
         for e in entries:
             print e'''
         results = db.comment
-        comments = results.find()
-        
+        r_comments = results.find()
+        comments = []
+        for comment in r_comments:
+            comments.append(comment)
+                
         loggedin = False
         if 'username' in session:
             loggedin = True

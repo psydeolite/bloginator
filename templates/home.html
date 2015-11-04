@@ -27,7 +27,6 @@
       </div>
       <div class="row">
 	<div class="col-sm-4">
-	  
 	  {% for entry in entries %}
 	  <h3>{{ entry['title'] }}</h3>
 	  <h4>by {{ entry['aname'] }}</h4>
@@ -35,14 +34,13 @@
 	    {{ entry['words'] }}
 	    <br>
 	    <form method="POST">
-	      <button name="button" type="submit" class="btn" value="{{entry[2]}}">Comment</button>
+	      <button name="button" type="submit" class="btn" value="{{entry['title']}}">Comment</button>
 	    </form>
 	  </p>
 	  <p>
-	    
 	    {% for comment in comments %}
-	    {% if comment[1] == entry[2] %}
-	    {{ comment[2] }}: {{ comment[0] }}
+	    {% if comment['ptitle'] == entry['title'] %}
+	    {{ comment['aname'] }}: {{ comment['words'] }}
 	    <br>
 	    {% endif %}
 	    {% endfor %}
