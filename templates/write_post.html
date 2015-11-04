@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Post</title>
-		
-		{% include "bootstrap.html" %}
-		
-	</head>
-	<body>
-		<div class="container">
-			<h2>Post Something</h2>
-			
-			{% if err %}
-				<h3>{{ err }}</h3>
-				<hr>
-			{% endif %}
-			
-			<form role="form" method="POST">
-				<div class="form-group">
-					<label for="title">Post Title:</label>
-					<input type="text" class="form-control" id="title" placeholder="Enter a title" name="title">
-				</div>
-				<div class="form-group">
-					<label for="body">Post:</label>
-					<textarea name="body" class="form-control" rows="5" id="body" placeholder="Write your post"></textarea>
-				</div>
-				<input type="submit" name="Post" class="btn btn-default" value="Post"></input>
-				<input type="submit" name="Cancel" class="btn btn-default" value="Cancel"></input>
-			</form>
-		</div>
-	</body>
+  <head>
+    <title>Post</title>
+    
+    {% include "bootstrap.html" %}
+    
+  </head>
+  <body>
+    <div class="container">
+      <h2>Post Something</h2>
+      
+      {% if err %}
+      <h3>{{ err }}</h3>
+      <hr>
+      {% endif %}
+      
+      <form method="POST">
+	<div class="form-group">
+	  <label for="title">Post Title:</label>
+	  <input type="text" class="form-control" id="title" placeholder="Enter a title" name="title">
+	</div>
+	<div class="form-group">
+	  <label for="body">Post:</label>
+	  <textarea name="body" class="form-control" rows="5" id="body" placeholder="Write your post"></textarea>
+	</div>
+	<input type="submit" name="button" class="btn btn-default" value="Post"></input>
+	<input type="submit" name="button" class="btn btn-default" value="Cancel"></input>
+      </form>
+    </div>
+  </body>
 </html>

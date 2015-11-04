@@ -61,9 +61,9 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         button = request.form.get('button')
-
-        if button=="cancel":
-            return render_template('home.html')
+        print request.form
+        if button=="Cancel":
+            return redirect(url_for('home'))
 
         if auth.authenticate(username, password):
             if 'username' not in session:
@@ -91,9 +91,10 @@ def create_post():
             title = request.form.get('title')
             body = request.form.get('body')
             button = request.form.get('button')
-
+            print 'aboutaprint'
+            print button
             if button == "Cancel":
-                return render_template('write_post.html')
+                return redirect(url_for('home'))
             elif title == "" or body == "":
                 err = "Error: Title and Body must have text." 
                 return render_template("write_post.html", err = err)
@@ -112,13 +113,13 @@ def create_account():
             if request.method == "GET":
                 return render_template("create_account.html")
             else:
+                print request.form
                 username = request.form['username']
                 password = request.form['password']
                 password_again = request.form['password_again']
                 button = request.form['button']
-    
                 if button == "Cancel":
-                    return render_template('create_account.html')
+                    return redirect(url_for('home'))
                 elif len(username) < 6 or len(password) < 6:
                     err = "Error: Username & Password both must be at least 6 characters." 
                     return render_template("create_account.html", err = err)
@@ -156,10 +157,11 @@ def create_comment():
             else:
                 return """<h2> You must select a post to comment on. </h2> <br><hr><br><a href = "/home">View Posts Here</a>"""
         else:
+            print request.form
             body = request.form.get('body')
             button = request.form.get('button')
             if button == "Cancel":
-                return render_template('comment_post.html')
+                return redirect(url_for('home'))
             elif body == "":
                 err = "Error: Body must have text." 
                 return render_template("write_post.html", err = err)
